@@ -253,5 +253,6 @@
         "storage",
         "bootstrap/cache",
         ".git"
-    ]
+    ],
+    "git.ignoreLimitWarning": true
 }

@@ -27,10 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    @vite(['resources/css/landing.css', 'resources/js/landing.js'])
-    
-    <!-- Fallback CSS Link -->
-    <link rel="stylesheet" href="{{ asset('build/assets/landing-D-_057f-.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <!-- Complete Functional CSS for Landing Page -->
     <style>
