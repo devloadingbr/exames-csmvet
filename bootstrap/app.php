@@ -15,6 +15,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'tenant' => App\Http\Middleware\TenantMiddleware::class,
             'role' => App\Http\Middleware\RoleMiddleware::class,
+            'security.headers' => App\Http\Middleware\SecurityHeaders::class,
+        ]);
+        
+        // Apply security headers to web routes
+        $middleware->web([
+            App\Http\Middleware\SecurityHeaders::class,
         ]);
         
         // Handle authentication redirects

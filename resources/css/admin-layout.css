@@ -56,15 +56,11 @@
     }
 }
 
-@keyframes fadeInUp {
-    from {
-        transform: translateY(30px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+/* DUPLICAÇÕES REMOVIDAS - app.css é fonte única para animações básicas */
+
+/* Pulse Glow Animation - específica do admin */
+.animate-pulse-glow {
+    animation: pulse-glow 2s infinite;
 }
 
 @keyframes pulse-glow {
@@ -78,29 +74,13 @@
     }
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
+/* SHIMMER REMOVIDO - definido em app.css */
 
-@keyframes shimmer {
-    0% {
-        background-position: -200% 0;
-    }
-    100% {
-        background-position: 200% 0;
-    }
-}
+/* FLOAT REMOVIDO - definido em app.css */
 
-/* Animation utility classes */
-.animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
-}
+/* DUPLICAÇÃO REMOVIDA */
 
+/* Slide in right - admin specific */
 .animate-slide-in-right {
     animation: slideInRight 0.3s ease-out;
 }
@@ -109,15 +89,9 @@
     animation: pulse-glow 2s infinite;
 }
 
-.animate-float {
-    animation: float 6s ease-in-out infinite;
-}
+/* FLOAT REMOVIDO - definido em app.css */
 
-.animate-shimmer {
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
-}
+/* SHIMMER REMOVIDO - definido em app.css */
 
 /* Enhanced hover effects */
 .hover-lift {
@@ -193,16 +167,7 @@
     transition: transform 0.3s ease-out;
 }
 
-/* Animation delays */
-.animation-delay-100 { animation-delay: 0.1s; }
-.animation-delay-200 { animation-delay: 0.2s; }
-.animation-delay-300 { animation-delay: 0.3s; }
-.animation-delay-400 { animation-delay: 0.4s; }
-.animation-delay-500 { animation-delay: 0.5s; }
-.animation-delay-600 { animation-delay: 0.6s; }
-.animation-delay-700 { animation-delay: 0.7s; }
-.animation-delay-800 { animation-delay: 0.8s; }
-.animation-delay-900 { animation-delay: 0.9s; }
+/* ANIMATION DELAYS REMOVIDOS - definidos em app.css */
 
 /* Intersection Observer animations */
 .animate-on-scroll {

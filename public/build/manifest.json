@@ -1,19 +1,62 @@
 {
+  "_admin-components-CLBgzILS.js": {
+    "file": "assets/admin-components-CLBgzILS.js",
+    "name": "admin-components",
+    "imports": [
+      "_alpine-Dy2cnrgk.js"
+    ]
+  },
+  "_alpine-Dy2cnrgk.js": {
+    "file": "assets/alpine-Dy2cnrgk.js",
+    "name": "alpine"
+  },
+  "_client-components-wz25pfIv.js": {
+    "file": "assets/client-components-wz25pfIv.js",
+    "name": "client-components",
+    "imports": [
+      "_alpine-Dy2cnrgk.js"
+    ]
+  },
+  "_shared-components-_JMO8U1r.js": {
+    "file": "assets/shared-components-_JMO8U1r.js",
+    "name": "shared-components",
+    "imports": [
+      "_alpine-Dy2cnrgk.js"
+    ]
+  },
+  "_stores-Dk8uRrvO.js": {
+    "file": "assets/stores-Dk8uRrvO.js",
+    "name": "stores"
+  },
+  "_utils-BFpTxm_b.js": {
+    "file": "assets/utils-BFpTxm_b.js",
+    "name": "utils",
+    "imports": [
+      "_vendor-3RDbrfm7.js"
+    ]
+  },
+  "_vendor-3RDbrfm7.js": {
+    "file": "assets/vendor-3RDbrfm7.js",
+    "name": "vendor"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-hrrXt41h.css",
+    "file": "assets/app-DTv6NBBI.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
-  "resources/js/admin-layout.js": {
-    "file": "assets/admin-layout-C5-A9BAk.js",
-    "name": "admin-layout",
-    "src": "resources/js/admin-layout.js",
-    "isEntry": true
-  },
   "resources/js/app.js": {
-    "file": "assets/app-C0G0cght.js",
+    "file": "assets/app-B8OoPyA4.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_utils-BFpTxm_b.js",
+      "_alpine-Dy2cnrgk.js",
+      "_stores-Dk8uRrvO.js",
+      "_shared-components-_JMO8U1r.js",
+      "_admin-components-CLBgzILS.js",
+      "_client-components-wz25pfIv.js",
+      "_vendor-3RDbrfm7.js"
+    ]
   }
 }

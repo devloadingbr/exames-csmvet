@@ -1,0 +1,56 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        "allowJs": true,
+        "checkJs": false,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": false,
+        "strictNullChecks": false,
+        "strictFunctionTypes": false,
+        "strictBindCallApply": false,
+        "strictPropertyInitialization": false,
+        "noImplicitAny": false,
+        "noImplicitReturns": false,
+        "noImplicitThis": false,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "exactOptionalPropertyTypes": false,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": false,
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "preserve",
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "removeComments": false,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["resources/js/*"],
+            "@/alpine/*": ["resources/js/alpine/*"],
+            "@/utils/*": ["resources/js/utils/*"],
+            "@/components/*": ["resources/js/alpine/components/*"],
+            "@/stores/*": ["resources/js/alpine/stores/*"],
+            "@/types/*": ["resources/js/types/*"]
+        },
+        "types": ["node", "jest", "alpinejs"]
+    },
+    "include": [
+        "resources/js/**/*.ts",
+        "resources/js/**/*.d.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "public",
+        "vendor",
+        "storage",
+        "resources/js/legacy/backup"
+    ]
+}

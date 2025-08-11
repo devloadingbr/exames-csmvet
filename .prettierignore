@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+public/build/
+public/hot
+
+# Storage and cache
+storage/
+bootstrap/cache/
+
+# Environment files
+.env*
+
+# Legacy code (to be refactored)
+resources/js/legacy/
+
+# Compiled assets
+*.min.js
+*.min.css

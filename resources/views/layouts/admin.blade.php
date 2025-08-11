@@ -10,8 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin-layout.js'])
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="h-full bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-gray-800/50 dark:to-slate-900 font-sans antialiased" x-data="{ sidebarOpen: false, mobileMenuOpen: false }">
     <!-- Fixed Sidebar -->
@@ -312,9 +311,61 @@
         </div>
     </div>
 
-    <!-- Toast notification system -->
-    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-4">
-        <!-- Toasts will be inserted here -->
+    <!-- Unified Toast System -->
+    <div x-data="{}" 
+         x-show="$store.toast.show" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform translate-x-full"
+         x-transition:enter-end="opacity-100 transform translate-x-0"
+         x-transition:leave="transition ease-in duration-300"
+         x-transition:leave-start="opacity-100 transform translate-x-0"
+         x-transition:leave-end="opacity-0 transform translate-x-full"
+         class="fixed top-4 right-4 z-50 max-w-sm">
+        <div class="glass-card px-6 py-4 border-2 shadow-lg" 
+             :class="{
+                 'border-green-300/50 bg-green-50/80 text-green-800': $store.toast.type === 'success',
+                 'border-red-300/50 bg-red-50/80 text-red-800': $store.toast.type === 'error',
+                 'border-blue-300/50 bg-blue-50/80 text-blue-800': $store.toast.type === 'info',
+                 'border-yellow-300/50 bg-yellow-50/80 text-yellow-800': $store.toast.type === 'warning'
+             }">
+            <div class="flex items-center">
+                <!-- Success Icon -->
+                <template x-if="$store.toast.type === 'success'">
+                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                </template>
+                
+                <!-- Error Icon -->
+                <template x-if="$store.toast.type === 'error'">
+                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                </template>
+                
+                <!-- Warning Icon -->
+                <template x-if="$store.toast.type === 'warning'">
+                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                </template>
+                
+                <!-- Info Icon -->
+                <template x-if="$store.toast.type === 'info'">
+                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                    </svg>
+                </template>
+                
+                <span class="text-sm font-medium flex-1" x-text="$store.toast.message"></span>
+                
+                <button @click="$store.toast.hide()" class="ml-4 text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
     </div>
 
     <script>
