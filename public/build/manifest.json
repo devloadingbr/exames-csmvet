@@ -1,7 +1,13 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-DxuLUcxi.css",
+    "file": "assets/app-hrrXt41h.css",
     "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/admin-layout.js": {
+    "file": "assets/admin-layout-C5-A9BAk.js",
+    "name": "admin-layout",
+    "src": "resources/js/admin-layout.js",
     "isEntry": true
   },
   "resources/js/app.js": {

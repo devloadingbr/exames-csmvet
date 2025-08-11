@@ -3,6 +3,11 @@
 ## Resumo do Projeto
 Sistema multi-tenant para gerenciamento de exames veterinários, permitindo que clínicas gerenciem exames de pets e clientes acessem resultados através de CPF e data de nascimento.
 
+## ⚠️ IMPORTANTE - Docker
+**TODOS os comandos devem ser executados dentro do ambiente Docker através do Laravel Sail.**
+- ❌ **NÃO usar**: `php`, `artisan`, `composer` diretamente
+- ✅ **SEMPRE usar**: `./vendor/bin/sail php`, `./vendor/bin/sail artisan`, `./vendor/bin/sail composer`
+
 ## Comandos Principais
 
 ### Inicialização

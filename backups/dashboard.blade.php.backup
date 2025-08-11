@@ -6,7 +6,7 @@
 @section('content')
 <div class="space-y-8 animate-fade-in-up mt-4">
     <!-- Hero Welcome Section -->
-    <div class="dashboard-hero-section glass-card p-8 bg-gradient-to-r from-blue-50/50 via-indigo-50/30 to-purple-50/50 dark:from-gray-800/50 dark:via-gray-700/30 dark:to-slate-800/50 overflow-hidden relative border-2 border-gradient">
+    <div class="glass-card p-8 bg-gradient-to-r from-blue-50/50 via-indigo-50/30 to-purple-50/50 dark:from-gray-800/50 dark:via-gray-700/30 dark:to-slate-800/50 overflow-hidden relative border-2 border-gradient" style="margin-top: 20px !important; position: relative !important; z-index: 1 !important;">
         <!-- Background decoration -->
         <div class="absolute inset-0 overflow-hidden">
             <div class="absolute top-8 right-8 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-2xl"></div>
@@ -56,7 +56,7 @@
     <!-- Stats Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         <!-- Clientes Card -->
-        <a href="{{ route('admin.clients.index') }}" class="group dashboard-stat-card dashboard-stat-card--purple animation-delay-100">
+        <a href="{{ route('admin.clients.index') }}" class="group glass-card p-6 hover:shadow-2xl hover:shadow-purple-500/10 transform hover:scale-105 transition-all duration-500 animate-fade-in-up border-2 hover:border-purple-400/40 animate-on-scroll will-change-transform gpu-accelerated">
             <div class="flex items-center justify-between mb-4">
                 <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-purple-500/25 group-hover:scale-110 transition-all duration-300 ring-2 ring-purple-400/30 border border-purple-400/20 group-hover:animate-pulse-glow">
                     <svg class="w-7 h-7 text-white transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@
         </a>
 
         <!-- Pets Card -->
-        <a href="{{ route('admin.clients.index') }}" class="group dashboard-stat-card dashboard-stat-card--orange animation-delay-200">
+        <a href="{{ route('admin.clients.index') }}" class="group glass-card p-6 hover:shadow-2xl hover:shadow-orange-500/10 transform hover:scale-105 transition-all duration-500 animate-fade-in-up animation-delay-100 border-2 hover:border-orange-400/40 animate-on-scroll will-change-transform gpu-accelerated">
             <div class="flex items-center justify-between mb-4">
                 <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-orange-500/25 group-hover:scale-110 transition-all duration-300 ring-2 ring-orange-400/30 border border-orange-400/20 group-hover:animate-pulse-glow">
                     <svg class="w-7 h-7 text-white transition-transform duration-300 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +90,7 @@
         </a>
 
         <!-- Total Exames Card -->
-        <a href="{{ route('admin.exams.index') }}" class="group dashboard-stat-card dashboard-stat-card--blue animation-delay-300">
+        <a href="{{ route('admin.exams.index') }}" class="group glass-card p-6 hover:shadow-2xl hover:shadow-blue-500/10 transform hover:scale-105 transition-all duration-500 animate-fade-in-up animation-delay-200 border-2 hover:border-blue-400/40 animate-on-scroll will-change-transform gpu-accelerated">
             <div class="flex items-center justify-between mb-4">
                 <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-blue-500/25 group-hover:scale-110 transition-all duration-300 ring-2 ring-blue-400/30 border border-blue-400/20 group-hover:animate-pulse-glow">
                     <svg class="w-7 h-7 text-white transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,7 +107,7 @@
         </a>
 
         <!-- Este Mês Card -->
-        <div class="group dashboard-stat-card dashboard-stat-card--indigo animation-delay-400 cursor-pointer">
+        <div class="group glass-card p-6 hover:shadow-2xl hover:shadow-indigo-500/10 transform hover:scale-105 transition-all duration-500 animate-fade-in-up animation-delay-300 border-2 hover:border-indigo-400/40 animate-on-scroll will-change-transform gpu-accelerated cursor-pointer">
             <div class="flex items-center justify-between mb-4">
                 <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-indigo-500/25 group-hover:scale-110 transition-all duration-300 ring-2 ring-indigo-400/30 border border-indigo-400/20 group-hover:animate-pulse-glow">
                     <svg class="w-7 h-7 text-white transition-transform duration-300 group-hover:-rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -124,7 +124,7 @@
         </div>
 
         <!-- Downloads Hoje Card -->
-        <div class="group dashboard-stat-card dashboard-stat-card--green animation-delay-500 cursor-pointer">
+        <div class="group glass-card p-6 hover:shadow-2xl hover:shadow-green-500/10 transform hover:scale-105 transition-all duration-500 animate-fade-in-up animation-delay-400 border-2 hover:border-green-400/40 animate-on-scroll will-change-transform gpu-accelerated cursor-pointer">
             <div class="flex items-center justify-between mb-4">
                 <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-green-500/25 group-hover:scale-110 transition-all duration-300 ring-2 ring-green-400/30 border border-green-400/20 group-hover:animate-pulse-glow">
                     <svg class="w-7 h-7 text-white transition-transform duration-300 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,7 +145,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Novo Exame -->
         <a href="{{ route('admin.exams.create') }}" 
-           class="group dashboard-action-card dashboard-action-card--dashed hover:shadow-green-500/10 animation-delay-500">
+           class="group glass-card p-8 hover:shadow-2xl hover:shadow-green-500/10 transform hover:scale-105 transition-all duration-500 border-2 border-dashed border-green-200/50 dark:border-green-700/50 hover:border-green-400/70 dark:hover:border-green-500/70 animate-fade-in-up animation-delay-500">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-500 group-hover:from-green-500 group-hover:to-green-600 rounded-3xl flex items-center justify-center shadow-xl group-hover:shadow-green-500/25 transform group-hover:scale-110 transition-all duration-300">
@@ -173,7 +173,7 @@
 
         <!-- Gerenciar Exames -->
         <a href="{{ route('admin.exams.index') }}" 
-           class="group dashboard-action-card hover:shadow-blue-500/10 animation-delay-600">
+           class="group glass-card p-8 hover:shadow-2xl hover:shadow-blue-500/10 transform hover:scale-105 transition-all duration-500 animate-fade-in-up animation-delay-600">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 group-hover:from-blue-600 group-hover:to-blue-700 rounded-3xl flex items-center justify-center shadow-xl group-hover:shadow-blue-500/25 transform group-hover:scale-110 transition-all duration-300">
@@ -201,7 +201,7 @@
 
         <!-- Tipos de Exame -->
         <a href="{{ route('admin.exam-types.index') }}" 
-           class="group dashboard-action-card hover:shadow-purple-500/10 animation-delay-700">
+           class="group glass-card p-8 hover:shadow-2xl hover:shadow-purple-500/10 transform hover:scale-105 transition-all duration-500 animate-fade-in-up animation-delay-700">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 group-hover:from-purple-600 group-hover:to-purple-700 rounded-3xl flex items-center justify-center shadow-xl group-hover:shadow-purple-500/25 transform group-hover:scale-110 transition-all duration-300">

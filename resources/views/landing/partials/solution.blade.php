@@ -1,12 +1,23 @@
-<section id="solucao" class="section bg-white animate-on-scroll">
-    <div class="container">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-gray-900 mb-6">
-                A solução <span class="text-blue-600">digital</span> que suas clínicas veterinárias precisam
+<section id="solucao" class="relative py-24 bg-gradient-to-br from-white via-blue-50/30 to-white animate-on-scroll overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute inset-0">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/3 right-1/3 w-80 h-80 bg-green-500/5 rounded-full blur-3xl animate-float-delayed"></div>
+        <div class="absolute top-2/3 left-1/3 w-64 h-64 bg-purple-500/5 rounded-full blur-2xl animate-pulse"></div>
+    </div>
+    
+    <div class="relative container">
+        <div class="text-center mb-20 animate-fade-in-up">
+            <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight">
+                A solução 
+                <span class="bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 bg-clip-text text-transparent animate-gradient-x">
+                    digital
+                </span> 
+                que suas clínicas veterinárias precisam
             </h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                Uma plataforma completa que resolve todos os problemas tradicionais 
-                e ainda oferece benefícios que você nem imaginava.
+            <p class="text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-light">
+                Uma <span class="font-semibold text-blue-600">plataforma completa</span> que resolve todos os problemas tradicionais 
+                e ainda oferece <span class="font-semibold text-green-600">benefícios</span> que você nem imaginava.
             </p>
         </div>
 

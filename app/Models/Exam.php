@@ -11,6 +11,37 @@ class Exam extends Model
 {
     use HasFactory, SoftDeletes, BelongsToClinic;
 
+    protected static function boot()
+    {
+        parent::boot();
+        
+        static::creating(function ($exam) {
+            if (empty($exam->codigo)) {
+                $exam->codigo = static::generateCodigo();
+            }
+        });
+    }
+
+    public static function generateCodigo(): string
+    {
+        $year = date('Y');
+        $prefix = "VET{$year}";
+        
+        // Buscar último código do ano
+        $lastExam = static::where('codigo', 'like', "{$prefix}%")
+            ->orderBy('codigo', 'desc')
+            ->first();
+        
+        if ($lastExam) {
+            $lastNumber = (int) substr($lastExam->codigo, -3);
+            $newNumber = $lastNumber + 1;
+        } else {
+            $newNumber = 1;
+        }
+        
+        return $prefix . str_pad($newNumber, 3, '0', STR_PAD_LEFT);
+    }
+
     protected $fillable = [
         'clinic_id',
         'client_id',

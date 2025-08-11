@@ -89,33 +89,92 @@ class ExamController extends Controller
 
     public function store(StoreExamRequest $request)
     {
-        $validated = $request->validated();
+        try {
+            $validated = $request->validated();
 
-        // Upload do arquivo
-        $file = $request->file('exam_file');
-        $filePath = $this->storageService->store($file, 'exams');
+            // Log da tentativa de criação
+            \Log::info('Tentativa de criação de exame', [
+                'user_id' => auth()->id(),
+                'clinic_id' => auth()->user()->clinic_id,
+                'client_id' => $validated['client_id'],
+                'pet_id' => $validated['pet_id'],
+                'exam_type_id' => $validated['exam_type_id'],
+            ]);
 
-        // Criar o exame
-        $exam = Exam::create([
-            'clinic_id' => auth()->user()->clinic_id,
-            'client_id' => $validated['client_id'],
-            'pet_id' => $validated['pet_id'],
-            'exam_type_id' => $validated['exam_type_id'],
-            'description' => $validated['description'],
-            'exam_date' => $validated['exam_date'],
-            'veterinarian_name' => $validated['veterinarian_name'],
-            'veterinarian_crmv' => $validated['veterinarian_crmv'],
-            'original_filename' => $file->getClientOriginalName(),
-            'file_path' => $filePath,
-            'file_size_bytes' => $file->getSize(),
-            'file_hash' => hash_file('sha256', $file->getRealPath()),
-            'storage_disk' => config('filesystems.default'),
-            'status' => 'ready',
-            'uploaded_by' => auth()->id(),
-        ]);
+            // Upload do arquivo com validação
+            $file = $request->file('exam_file');
+            if (!$file || !$file->isValid()) {
+                \Log::error('Arquivo inválido no upload', [
+                    'file_error' => $file ? $file->getError() : 'null',
+                    'user_id' => auth()->id()
+                ]);
+                return back()
+                    ->withInput()
+                    ->withErrors(['exam_file' => 'Erro no upload do arquivo. Tente novamente.']);
+            }
 
-        return redirect()->route('admin.exams.show', $exam->codigo)
-            ->with('success', "Exame {$exam->codigo} enviado com sucesso!");
+            $filePath = $this->storageService->store($file, 'exams');
+
+            // Criar o exame (codigo será gerado automaticamente)
+            $exam = Exam::create([
+                'clinic_id' => auth()->user()->clinic_id,
+                'client_id' => $validated['client_id'],
+                'pet_id' => $validated['pet_id'],
+                'exam_type_id' => $validated['exam_type_id'],
+                'description' => $validated['description'],
+                'exam_date' => $validated['exam_date'],
+                'veterinarian_name' => $validated['veterinarian_name'],
+                'veterinarian_crmv' => $validated['veterinarian_crmv'],
+                'original_filename' => $file->getClientOriginalName(),
+                'file_path' => $filePath,
+                'file_size_bytes' => $file->getSize(),
+                'file_hash' => hash_file('sha256', $file->getRealPath()),
+                'storage_disk' => config('filesystems.default'),
+                'status' => 'ready',
+                'uploaded_by' => auth()->id(),
+            ]);
+
+            // Verificar se código foi gerado
+            if (empty($exam->codigo)) {
+                \Log::error('Exame criado sem código', [
+                    'exam_id' => $exam->id,
+                    'user_id' => auth()->id(),
+                    'clinic_id' => auth()->user()->clinic_id
+                ]);
+                
+                // Tentar regenerar o código
+                $exam->codigo = Exam::generateCodigo();
+                $exam->save();
+                
+                if (empty($exam->codigo)) {
+                    return back()
+                        ->withInput()
+                        ->withErrors(['error' => 'Erro interno: não foi possível gerar código do exame.']);
+                }
+            }
+
+            \Log::info('Exame criado com sucesso', [
+                'exam_id' => $exam->id,
+                'codigo' => $exam->codigo,
+                'user_id' => auth()->id()
+            ]);
+
+            return redirect()->route('admin.exams.show', $exam->codigo)
+                ->with('success', "Exame {$exam->codigo} criado com sucesso!");
+
+        } catch (\Exception $e) {
+            \Log::error('Erro ao criar exame', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'user_id' => auth()->id(),
+                'clinic_id' => auth()->user()->clinic_id,
+                'form_data' => $request->except(['exam_file', '_token'])
+            ]);
+
+            return back()
+                ->withInput()
+                ->withErrors(['error' => 'Erro ao criar exame. Verifique os dados e tente novamente.']);
+        }
     }
 
     public function show(Exam $exam)
@@ -173,19 +232,52 @@ class ExamController extends Controller
     public function searchPets(Request $request)
     {
         $search = $request->get('q');
+        $clientId = $request->get('client_id');
         
-        $pets = Pet::with('client')
-            ->where('clinic_id', auth()->user()->clinic_id)
+        $query = Pet::with('client')
+            ->where('clinic_id', auth()->user()->clinic_id);
+            
+        // Filtrar por cliente se especificado
+        if ($clientId) {
+            $query->where('client_id', $clientId);
+        }
+        
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhereHas('client', function ($clientQuery) use ($search) {
+                      $clientQuery->where('name', 'like', "%{$search}%")
+                                  ->orWhere('cpf', 'like', "%{$search}%");
+                  });
+            });
+        }
+        
+        $pets = $query->limit(20)->get();
+
+        return response()->json($pets);
+    }
+
+    // API para busca de clientes (AJAX)
+    public function searchClients(Request $request)
+    {
+        $search = $request->get('q');
+        
+        if (!$search || strlen($search) < 2) {
+            return response()->json([]);
+        }
+        
+        $clients = Client::where('clinic_id', auth()->user()->clinic_id)
             ->where(function ($query) use ($search) {
                 $query->where('name', 'like', "%{$search}%")
-                      ->orWhereHas('client', function ($clientQuery) use ($search) {
-                          $clientQuery->where('name', 'like', "%{$search}%")
-                                      ->orWhere('cpf', 'like', "%{$search}%");
-                      });
+                      ->orWhere('cpf', 'like', "%{$search}%") 
+                      ->orWhere('email', 'like', "%{$search}%")
+                      ->orWhere('phone', 'like', "%{$search}%");
             })
+            ->withCount('pets')
+            ->orderBy('name')
             ->limit(10)
             ->get();
 
-        return response()->json($pets);
+        return response()->json($clients);
     }
 }

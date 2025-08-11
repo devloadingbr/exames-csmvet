@@ -11,13 +11,16 @@ RUN apk add --no-cache \
     unzip \
     postgresql-dev \
     nginx \
-    supervisor
-
-# Clear cache
-RUN apk del --purge autoconf g++ make
+    supervisor \
+    autoconf \
+    g++ \
+    make
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd
+
+# Clean up build dependencies
+RUN apk del --purge autoconf g++ make
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -31,6 +34,6 @@ COPY . /var/www/html
 # Copy existing application directory permissions
 COPY --chown=www-data:www-data . /var/www/html
 
-# Expose port 9000 and start php-fpm server
+# Expose port 80
 EXPOSE 80
 CMD ["php", "-S", "0.0.0.0:80", "-t", "public"]

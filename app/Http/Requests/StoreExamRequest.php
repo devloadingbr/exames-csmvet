@@ -15,8 +15,29 @@ class StoreExamRequest extends FormRequest
     {
         return [
             'exam_type_id' => 'required|exists:exam_types,id',
-            'pet_id' => 'required|exists:pets,id',
-            'client_id' => 'required|exists:clients,id',
+            'pet_id' => [
+                'required',
+                'exists:pets,id',
+                function ($attribute, $value, $fail) {
+                    $pet = \App\Models\Pet::find($value);
+                    if ($pet && $pet->clinic_id !== auth()->user()->clinic_id) {
+                        $fail('O pet selecionado não pertence à sua clínica.');
+                    }
+                    if ($pet && $this->client_id && $pet->client_id != $this->client_id) {
+                        $fail('O pet selecionado não pertence ao cliente informado.');
+                    }
+                },
+            ],
+            'client_id' => [
+                'required',
+                'exists:clients,id',
+                function ($attribute, $value, $fail) {
+                    $client = \App\Models\Client::find($value);
+                    if ($client && $client->clinic_id !== auth()->user()->clinic_id) {
+                        $fail('O cliente selecionado não pertence à sua clínica.');
+                    }
+                },
+            ],
             'exam_date' => 'required|date|before_or_equal:today',
             'veterinarian_name' => 'required|string|max:255',
             'veterinarian_crmv' => 'nullable|string|max:20',
@@ -50,12 +71,17 @@ class StoreExamRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        // Garantir que pet e client são da mesma clínica
-        if ($this->pet_id) {
+        // Apenas log para debugging, não alterar dados do formulário
+        if ($this->pet_id && $this->client_id) {
             $pet = \App\Models\Pet::find($this->pet_id);
-            if ($pet && $pet->clinic_id === auth()->user()->clinic_id) {
-                $this->merge([
-                    'client_id' => $pet->client_id
+            
+            if ($pet && $pet->client_id != $this->client_id) {
+                \Log::warning("Inconsistência pet/client detectada", [
+                    'pet_id' => $this->pet_id,
+                    'pet_client_id' => $pet->client_id,
+                    'form_client_id' => $this->client_id,
+                    'user_id' => auth()->id(),
+                    'clinic_id' => auth()->user()->clinic_id
                 ]);
             }
         }

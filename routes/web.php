@@ -75,6 +75,8 @@ Route::prefix('admin')->group(function () {
             ->name('admin.exams.download');
         Route::get('/api/pets/search', 'App\Http\Controllers\ExamController@searchPets')
             ->name('admin.pets.search');
+        Route::get('/api/clients/search', 'App\Http\Controllers\ExamController@searchClients')
+            ->name('admin.clients.search');
             
         // Clientes
         Route::resource('clients', 'App\Http\Controllers\AdminClientController', [
