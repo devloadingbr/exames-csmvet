@@ -1,0 +1,138 @@
+# Laravel & PHP
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
+
+# IDE & Editors
+*.swp
+*.swo
+*~
+
+# OS & System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+storage/logs/*
+!storage/logs/.gitkeep
+
+# Cache & Sessions
+storage/framework/cache/data/*
+!storage/framework/cache/data/.gitkeep
+storage/framework/sessions/*
+!storage/framework/sessions/.gitkeep
+storage/framework/testing/*
+!storage/framework/testing/.gitkeep
+storage/framework/views/*
+!storage/framework/views/.gitkeep
+storage/app/public/*
+!storage/app/public/.gitkeep
+
+# Documentation & Development Files
+/docs/
+/backups/
+/temp-project/
+README-dev.md
+CHANGELOG.md
+TODO.md
+*.backup
+
+# Security & Sensitive Files
+.env.*
+!.env.example
+auth.json
+composer.phar
+*.pem
+*.p12
+*.key
+*.crt
+*.csr
+secrets/
+private/
+
+# Database
+*.sqlite
+*.sqlite3
+database.sqlite
+*.db
+
+# Build & Distribution
+/build/
+/dist/
+/public/build/*
+/public/hot
+/public/mix-manifest.json
+
+# Package Managers
+node_modules/
+bower_components/
+vendor/
+composer.lock
+
+# Testing
+/coverage/
+.phpunit.result.cache
+phpunit.xml.bak
+
+# Temporary Files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# IDE Specific
+.idea/
+.vscode/
+*.sublime-*
+.project
+.settings/
+.buildpath
+
+# Laravel Specific
+storage/debugbar/
+storage/app/livewire-tmp/
+bootstrap/cache/*.php
+!bootstrap/cache/.gitkeep
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# MinIO/S3
+minio-data/
+
+# Sail
+sail.env
+
+# Misc
+*.pid
+*.seed
+*.pid.lock
+.sass-cache/
+connect.lock
+typings/
+.nyc_output
+*.tgz
+*.tar.gz
